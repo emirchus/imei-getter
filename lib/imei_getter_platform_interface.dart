@@ -14,7 +14,7 @@ abstract class ImeiGetterPlatform extends PlatformInterface {
   ///
   /// Defaults to [MethodChannelImeiGetter].
   static ImeiGetterPlatform get instance => _instance;
-  
+
   /// Platform-specific implementations should set this with their own
   /// platform-specific class that extends [ImeiGetterPlatform] when
   /// they register themselves.
@@ -23,7 +23,12 @@ abstract class ImeiGetterPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<String?> getPlatformVersion() {
+  Future<String?> getImei() {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
+
+  Future<String?> getLanguage() {
+    throw UnimplementedError('getLanguage() has not been implemented.');
+  }
+
 }

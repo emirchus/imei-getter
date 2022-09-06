@@ -34,7 +34,7 @@ class ImeiGetterPlugin : FlutterPlugin, MethodCallHandler {
             } catch (e: Exception) {
                 result.error("500", "Unhandled Exception", e.message);
             }
-        } else if (call.method === "getLanguage") {
+        } else if (call.method == "getLanguage") {
             return result.success(Locale.getDefault());
         } else {
             result.notImplemented()

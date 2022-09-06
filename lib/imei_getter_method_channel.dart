@@ -10,8 +10,14 @@ class MethodChannelImeiGetter extends ImeiGetterPlatform {
   final methodChannel = const MethodChannel('imei_getter');
 
   @override
-  Future<String?> getPlatformVersion() async {
-    final version = await methodChannel.invokeMethod<String>('getPlatformVersion');
+  Future<String?> getImei() async {
+    final version = await methodChannel.invokeMethod<String>('getImei');
+    return version;
+  }
+
+  @override
+  Future<String?> getLanguage() async {
+    final version = await methodChannel.invokeMethod<String>('getLanguage');
     return version;
   }
 }
