@@ -28,16 +28,20 @@ class ImeiGetterPlugin : FlutterPlugin, MethodCallHandler {
     }
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
-        if (call.method == "getImei") {
-            return try {
-                result.success(getImei());
-            } catch (e: Exception) {
-                result.error("500", "Unhandled Exception", e.message);
+        when (call.method) {
+            "getImei" -> {
+                return try {
+                    result.success(getImei());
+                } catch (e: Exception) {
+                    result.error("500", "Unhandled Exception", e.message);
+                }
             }
-        } else if (call.method == "getLanguage") {
-            return result.success(Locale.getDefault());
-        } else {
-            result.notImplemented()
+            "getLanguage" -> {
+                return result.success(Locale.getDefault());
+            }
+            else -> {
+                result.notImplemented()
+            }
         }
     }
 
