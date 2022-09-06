@@ -4,12 +4,18 @@ import 'package:imei_getter/imei_getter_platform_interface.dart';
 import 'package:imei_getter/imei_getter_method_channel.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-class MockImeiGetterPlatform 
+class MockImeiGetterPlatform
     with MockPlatformInterfaceMixin
     implements ImeiGetterPlatform {
+  @override
+  Future<String?> getImei() async {
+    return "2";
+  }
 
   @override
-  Future<String?> getPlatformVersion() => Future.value('42');
+  Future<String?> getLanguage() async {
+    return "3";
+  }
 }
 
 void main() {
@@ -23,7 +29,7 @@ void main() {
     ImeiGetter imeiGetterPlugin = ImeiGetter();
     MockImeiGetterPlatform fakePlatform = MockImeiGetterPlatform();
     ImeiGetterPlatform.instance = fakePlatform;
-  
-    expect(await imeiGetterPlugin.getPlatformVersion(), '42');
+
+    expect(await imeiGetterPlugin.getImei(), '2');
   });
 }

@@ -37,7 +37,7 @@ class ImeiGetterPlugin : FlutterPlugin, MethodCallHandler {
                 }
             }
             "getLanguage" -> {
-                return result.success(Locale.getDefault());
+                return result.success(Locale.getDefault().toString());
             }
             else -> {
                 result.notImplemented()
@@ -49,11 +49,12 @@ class ImeiGetterPlugin : FlutterPlugin, MethodCallHandler {
         var telephonyManager =
             context.getSystemService(TELEPHONY_SERVICE) as TelephonyManager
 
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.O) {
-            throw Exception("The sdk version is not supported");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            return telephonyManager.getImei(0);
         }
 
-        return telephonyManager.imei;
+        throw Exception("The sdk version is not supported");
+
     }
 
     override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
